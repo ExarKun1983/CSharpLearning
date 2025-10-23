@@ -5,40 +5,57 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            int a = Solution(10000000, 12345678);
-        }
+            int a = Solution(10, 21);
+            Console.WriteLine(a);
+        } 
 
         public static int Solution(int a, int b)
         {
-            if (a == b)
-            {
-                return a / 2;
-            }
-
-            int total = a + b;
-
-            int divTotal = total / 4;
-            if (divTotal == 0) {
+            if (a <= 0 || b <= 0)
                 return 0;
-                    }
+
+            if (a == b)
+                return a / 2;
+
+            int left = 1;
+            Console.WriteLine("Left:"+left);
+            int right = Math.Max(a, b);
+            Console.WriteLine("Right:" + right);
+            int result = 0;
 
             int counter = 0;
-            while(true)
+            while (left <= right)
             {
-                Console.WriteLine(++counter);
-                int divA = a / divTotal;
-                int divB = b / divTotal;
+                Console.WriteLine("Loop no:" + ++counter);
+                int mid = (right + left) / 2;
+                Console.WriteLine("mid:" + mid);
+
+                
+                int divA = a / mid;
+                Console.WriteLine("divA:" + divA);
+                int divB = b / mid;
+                Console.WriteLine("divB:" + divB);
 
                 if (divA + divB >= 4)
                 {
-                    Console.WriteLine(divTotal);
-                    return divTotal;
+                    Console.WriteLine("Sum >= 4");
+                    result = mid;
+                    Console.WriteLine("Result:"+ mid);
+                    left = mid + 1;
+                    Console.WriteLine("Left:" + left);
+                    Console.WriteLine("Right:" + right);
                 }
                 else
                 {
-                    divTotal--;
-                }                
+                    Console.WriteLine("Sum < 4");
+                    right = mid - 1;
+                    Console.WriteLine("Left:" + left);
+                    Console.WriteLine("Right:" + right);
+                }
+
+                Console.WriteLine("------------------------------------------------------");
             }
+            return result;
         }
     }
 }
